@@ -84,11 +84,15 @@ public class Course {
     }
 
     // RED
-    Student[] getStudents() {
-        Student[] studentsArray = enrolledStudents.toArray(new Student[0]);
-        return studentsArray;
+//    Student[] getStudents() {
+//        Student[] studentsArray = enrolledStudents.toArray(new Student[0]);
+//        return studentsArray;
+//    }
+    List<Student> getStudents() {
+        return enrolledStudents;
     }
 
+    // RED
     boolean setInstructor(Instructor instructor) {
         if (instructor.canTeach(subject)) {
             this.instructor = instructor;
@@ -97,6 +101,7 @@ public class Course {
         return false;
     }
 
+    // RED
     boolean hasInstructor() {
         boolean hasInstructor = false;
         if (instructor != null) {
@@ -105,6 +110,7 @@ public class Course {
         return hasInstructor;
     }
 
+    // RED
     boolean isCancelled() {
         return isCancelled;
     }
