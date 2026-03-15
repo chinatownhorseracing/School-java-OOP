@@ -17,11 +17,9 @@ public class Administrator {
         for (int i = 0; i < days; i++)
         {
             simulatedDay();
+            reportDay();
         }
     }
-
-
-
 
     void simulatedDay() {
         admitStudents();
@@ -75,19 +73,48 @@ public class Administrator {
         }
     }
 
-    void registerStudent() {
+    void reportDay() {
+        reportCourses();
+        reportStudents();
+        reportInstructors();
+    }
+
+    void reportCourses() {
+        List<Course> courses = school.getCourses();
+        for (Course course : courses) {
+            int status = course.getStatus();
+            List<Student> enrolledStudents = course.getStudents();
+            System.out.println(status);
+            System.out.println(enrolledStudents);
+        }
+    }
+
+    void reportStudents() {
+        List<Student> students = school.getStudents();
+        List<Course> courses = school.getCourses();
+
+        for (Student student : students) {
+
+            List<Integer> studentCertificates = student.getCertificates();
+            System.out.println(studentCertificates);
+
+            for (Course course : courses) {
+                List<Student> enrolledStudents = course.getStudents();
+                if (enrolledStudents.contains(student)) {
+                    System.out.println(course);
+                }
+            }
+
+        }
+
 
     }
 
-    void deregisterStudent() {
-
-    }
-
-    void registerInstructor() {
-
-    }
-
-    void deregisterInstructor() {
-
+    void reportInstructors() {
+        List<Instructor> instructors = school.getInstructors();
+        for (Instructor instructor : instructors) {
+            Course instructorAssignedCourse = instructor.getAssignedCourse();
+            System.out.println(instructorAssignedCourse);
+        }
     }
 }
