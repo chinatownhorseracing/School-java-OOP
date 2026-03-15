@@ -110,11 +110,33 @@ public class School {
 
         // Assign free students to courses they can join
         List<Student> allCourseStudents = getAllCourseStudents();
-        List<Student> freeStudents = new ArrayList<>();
+        List<Student> freeStudents = getFreeStudents(allCourseStudents);
+        for (Student student : freeStudents) {
+            for (Course course : courses) {
+                Subject courseSubject = course.getSubject();
+                int sizeCourse = course.getSize();
+                if (!student.hasCertificate(courseSubject) && sizeCourse < 3) {
+                    course.enrolStudent(student);
+                    break;
+                }
+            }
+        }
 
-        for (Student student : students) {
-            if (!allCourseStudents.contains(student)) {
-                freeStudents.add(student);
+        // Advance each course by one day
+        for (Course course : courses) {
+            course.aDayPasses();
+        }
+
+        // Remove finished or canceled courses
+        for (Course course : courses) {
+            boolean isFinished = false;
+            int courseStatus = course.getStatus();
+            if (courseStatus == 0) {
+                isFinished = true;
+            }
+            boolean isCancelled = course.isCancelled();
+            if (isFinished || isCancelled) {
+                courses.remove(course);
             }
         }
     }
@@ -146,7 +168,15 @@ public class School {
         return allCourseStudents;
     }
 
-    List<Student> getFreeStudents() {
+    List<Student> getFreeStudents(List<Student> allCourseStudents) {
+        List<Student> freeStudents = new ArrayList<>();
 
+        for (Student student : students) {
+            if (!allCourseStudents.contains(student)) {
+                freeStudents.add(student);
+            }
+        }
+
+        return freeStudents;
     }
 }
