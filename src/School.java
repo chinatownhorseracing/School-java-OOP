@@ -191,4 +191,31 @@ public class School {
 
         return freeInstructors;
     }
+
+    List<Student> getGraduateStudents() {
+        List<Student> graduateStudents = new ArrayList<>();
+
+        List<Integer> subjectIds = getSubjectIds();
+        int numberSubjectIds = subjectIds.size();
+
+        for (Student student : students) {
+            List<Integer> studentCertificates = student.getCertificates();
+            int numberStudentCertificates = studentCertificates.size();
+
+            if (studentCertificates.containsAll(subjectIds) && numberSubjectIds == numberStudentCertificates) {
+                graduateStudents.add(student);
+            }
+        }
+        return graduateStudents;
+    }
+
+    List<Integer> getSubjectIds() {
+        List<Integer> subjectIds = new ArrayList<>();
+        for (Subject subject : subjects) {
+            int subjectId = subject.getId();
+            subjectIds.add(subjectId);
+        }
+
+        return subjectIds;
+    }
 }

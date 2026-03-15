@@ -28,6 +28,8 @@ public class Administrator {
         admitInstructors();
         school.aDayAtSchool();
         kickFreeInstructors();
+        kickGraduateStudents();
+        kickFreeStudents();
     }
 
     void admitStudents() {
@@ -50,6 +52,25 @@ public class Administrator {
             int chanceBoundary = random.nextInt(100) + 1;
             if (chanceBoundary <= 20) {
                 school.remove(freeInstructor);
+            }
+        }
+    }
+
+    void kickGraduateStudents() {
+        List<Student> graduateStudents = school.getGraduateStudents();
+        for (Student graduateStudent : graduateStudents) {
+            school.remove(graduateStudent);
+        }
+    }
+
+    void kickFreeStudents() {
+        List<Student> allCourseStudents = school.getAllCourseStudents();
+        List<Student> freeStudents = school.getFreeStudents(allCourseStudents);
+        for (Student freeStudent : freeStudents) {
+            Random random = new Random();
+            int chanceThreshold = random.nextInt(100) + 1;
+            if (chanceThreshold <= 5) {
+                school.remove(freeStudent);
             }
         }
     }
