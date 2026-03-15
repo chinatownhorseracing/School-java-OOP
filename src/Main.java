@@ -5,7 +5,7 @@ public class Main {
         Subject s = new Subject(1, 1, 2, "");
         Course c = new Course(s, 2);
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             c.aDayPasses();
         }
 
