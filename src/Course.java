@@ -2,9 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Course {
+
+    // RED
     private Subject subject;
     private int daysUntilStarts;
     private int daysToRun;
+
     private List<Student> enrolledStudents = new ArrayList<>(3);
     private Instructor instructor;
     private boolean isCancelled = false;
@@ -15,10 +18,12 @@ public class Course {
         daysToRun = subject.getDuration();
     }
 
+    // RED
     public Subject getSubject() {
         return subject;
     }
 
+    // RED
     int getStatus() {
 
         // Course didn't start
@@ -34,6 +39,7 @@ public class Course {
         return 0;
     }
 
+    // RED
     void aDayPasses() {
         // if course not started
         if (daysUntilStarts > 0) {
@@ -57,6 +63,7 @@ public class Course {
         }
     }
 
+    // RED
     boolean enrolStudent(Student student) {
         int courseStatus = getStatus();
         boolean courseStarted = false;
@@ -70,11 +77,13 @@ public class Course {
         return false;
     }
 
+    // RED
     int getSize() {
         int numberEnrolledStudents = enrolledStudents.size();
         return numberEnrolledStudents;
     }
 
+    // RED
     Student[] getStudents() {
         Student[] studentsArray = enrolledStudents.toArray(new Student[0]);
         return studentsArray;
