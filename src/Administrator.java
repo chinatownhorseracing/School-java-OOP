@@ -35,12 +35,51 @@ public class Administrator {
         int numberNewStudentsToAdmit = random.nextInt(3);
         List<Student> students = school.getStudents();
         for (int i = 0; i < numberNewStudentsToAdmit; i++) {
-            school.add(new Student());
+            String randomName = "Student " + random.nextInt(1000);
+            char randomGender = getRandomGender();
+            int randomAge = random.nextInt(40) + 40;
+            school.add(new Student(randomName, randomGender, randomAge));
         }
     }
 
     void admitInstructors() {
+        Random random = new Random();
 
+        // See if we get teacher
+        int chanceBoundary = random.nextInt(100) + 1;
+        if (chanceBoundary <= 20) {
+            String randomName = "Teacher " + random.nextInt(1000);
+            char randomGender = getRandomGender();
+            int randomAge = random.nextInt(40) + 40;
+            school.add(new Teacher(randomName, randomGender, randomAge));
+        }
+
+        // See if we get demonstrator
+        chanceBoundary = random.nextInt(100) + 1;
+        if (chanceBoundary <= 10) {
+            String randomName = "Demonstrator " + random.nextInt(1000);
+            char randomGender = getRandomGender();
+            int randomAge = random.nextInt(40) + 40;
+            school.add(new Demonstrator(randomName, randomGender, randomAge));
+        }
+
+        // See if we get OOTrainer
+        chanceBoundary = random.nextInt(100) + 1;
+        if (chanceBoundary <= 5) {
+            String randomName = "OOTrainer " + random.nextInt(1000);
+            char randomGender = getRandomGender();
+            int randomAge = random.nextInt(40) + 40;
+            school.add(new OOTrainer(randomName, randomGender, randomAge));
+        }
+
+        // See if we get GUITrainer
+        chanceBoundary = random.nextInt(100) + 1;
+        if (chanceBoundary <= 5) {
+            String randomName = "GUITrainer " + random.nextInt(1000);
+            char randomGender = getRandomGender();
+            int randomAge = random.nextInt(40) + 40;
+            school.add(new GUITrainer(randomName, randomGender, randomAge));
+        }
     }
 
     void kickFreeInstructors() {
@@ -116,5 +155,18 @@ public class Administrator {
             Course instructorAssignedCourse = instructor.getAssignedCourse();
             System.out.println(instructorAssignedCourse);
         }
+    }
+
+    char getRandomGender() {
+        Random random = new Random();
+        boolean genderBool = random.nextBoolean();
+        char gender;
+        if (genderBool) {
+            gender = 'M';
+        }
+        else {
+            gender = 'F';
+        }
+        return gender;
     }
 }
