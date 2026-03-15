@@ -94,14 +94,14 @@ public class School {
         }
 
         // Assign instructors to courses that need one
+        List<Instructor> freeInstructors = getFreeInstructors();
         for (Course course : courses) {
             Subject courseSubject = course.getSubject();
             if (!course.hasInstructor()) {
-                for (Instructor instructor : instructors) {
-                    Course instructorAssignedCourse = instructor.getAssignedCourse();
-                    if (instructorAssignedCourse == null && instructor.canTeach(courseSubject)) {
-                        course.setInstructor(instructor);
-                        instructor.assignCourse(course);
+                for (Instructor freeInstructor : instructors) {
+                    if (freeInstructor.canTeach(courseSubject)) {
+                        course.setInstructor(freeInstructor);
+                        freeInstructor.assignCourse(course);
                         break;
                     }
                 }
@@ -111,12 +111,12 @@ public class School {
         // Assign free students to courses they can join
         List<Student> allCourseStudents = getAllCourseStudents();
         List<Student> freeStudents = getFreeStudents(allCourseStudents);
-        for (Student student : freeStudents) {
+        for (Student freeStudent : freeStudents) {
             for (Course course : courses) {
                 Subject courseSubject = course.getSubject();
                 int sizeCourse = course.getSize();
-                if (!student.hasCertificate(courseSubject) && sizeCourse < 3) {
-                    course.enrolStudent(student);
+                if (!freeStudent.hasCertificate(courseSubject) && sizeCourse < 3) {
+                    course.enrolStudent(freeStudent);
                     break;
                 }
             }
@@ -178,5 +178,17 @@ public class School {
         }
 
         return freeStudents;
+    }
+
+    List<Instructor> getFreeInstructors() {
+        List<Instructor> freeInstructors = new ArrayList<>();
+        for (Instructor instructor : instructors) {
+            Course instructorAssignedCourse = instructor.getAssignedCourse();
+            if (instructorAssignedCourse == null) {
+                freeInstructors.add(instructor);
+            }
+        }
+
+        return freeInstructors;
     }
 }

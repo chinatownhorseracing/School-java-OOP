@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -25,6 +26,8 @@ public class Administrator {
     void simulatedDay() {
         admitStudents();
         admitInstructors();
+        school.aDayAtSchool();
+        kickFreeInstructors();
     }
 
     void admitStudents() {
@@ -32,12 +35,23 @@ public class Administrator {
         int numberNewStudentsToAdmit = random.nextInt(3);
         List<Student> students = school.getStudents();
         for (int i = 0; i < numberNewStudentsToAdmit; i++) {
-            students.add(new Student());
+            school.add(new Student());
         }
     }
 
     void admitInstructors() {
 
+    }
+
+    void kickFreeInstructors() {
+        List<Instructor> freeInstructors = school.getFreeInstructors();
+        for (Instructor freeInstructor : freeInstructors) {
+            Random random = new Random();
+            int chanceBoundary = random.nextInt(100) + 1;
+            if (chanceBoundary <= 20) {
+                school.remove(freeInstructor);
+            }
+        }
     }
 
     void registerStudent() {
