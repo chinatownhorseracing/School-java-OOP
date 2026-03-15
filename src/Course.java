@@ -5,7 +5,9 @@ public class Course {
     private Subject subject;
     private int daysUntilStarts;
     private int daysToRun;
-    List<Student> enrolledStudents = new ArrayList<>(3);
+    private List<Student> enrolledStudents = new ArrayList<>(3);
+    private Instructor instructor;
+    private boolean isCancelled = false;
 
     Course(Subject subject, int daysUntilStarts) {
         this.subject = subject;
@@ -33,15 +35,24 @@ public class Course {
     }
 
     void aDayPasses() {
+        // if course not started
         if (daysUntilStarts > 0) {
             daysUntilStarts--;
         }
+
+        // if course finished
         else if (daysToRun == 0) {
             for (Student student : enrolledStudents) {
                 student.graduate(subject);
             }
+            instructor = null;
         }
+
+        // if course started
         else {
+            if (instructor == null || enrolledStudents.size() == 0) {
+                isCancelled = true;
+            }
             daysToRun--;
         }
     }
@@ -69,5 +80,23 @@ public class Course {
         return studentsArray;
     }
 
+    boolean setInstructor(Instructor instructor) {
+        if (instructor.canTeach(subject)) {
+            this.instructor = instructor;
+            return true;
+        }
+        return false;
+    }
 
+    boolean hasInstructor() {
+        boolean hasInstructor = false;
+        if (instructor != null) {
+            hasInstructor = true;
+        }
+        return hasInstructor;
+    }
+
+    boolean isCancelled() {
+        return isCancelled;
+    }
 }
