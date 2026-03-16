@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -9,19 +8,19 @@ public class Administrator {
 
     void run() {
         while (true) {
-            simulatedDay();
+            simulateDay();
         }
     }
 
     void run(int days) {
         for (int i = 0; i < days; i++)
         {
-            simulatedDay();
+            simulateDay();
             reportDay();
         }
     }
 
-    void simulatedDay() {
+    void simulateDay() {
         admitStudents();
         admitInstructors();
         school.aDayAtSchool();
