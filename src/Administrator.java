@@ -21,15 +21,15 @@ public class Administrator {
     }
 
     void simulateDay() {
-        admitStudents();
-        admitInstructors();
+        admitNewStudents();
+        admitNewInstructors();
         school.aDayAtSchool();
         kickFreeInstructors();
         kickGraduateStudents();
         kickFreeStudents();
     }
 
-    void admitStudents() {
+    void admitNewStudents() {
         Random random = new Random();
         int numberNewStudentsToAdmit = random.nextInt(3);
         List<Student> students = school.getStudents();
@@ -41,7 +41,7 @@ public class Administrator {
         }
     }
 
-    void admitInstructors() {
+    void admitNewInstructors() {
         Random random = new Random();
 
         // See if we get teacher
