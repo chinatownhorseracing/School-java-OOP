@@ -51,7 +51,7 @@ public class Course {
             for (Student student : enrolledStudents) {
                 student.graduate(subject);
             }
-            instructor = null;
+            instructor.unassignCourse();
         }
 
         // if course started
