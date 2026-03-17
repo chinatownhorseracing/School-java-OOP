@@ -263,4 +263,8 @@ public class School {
         fullCourseDetails = courseSubjectName + ": " + "(Instructor: " + instructorName + ", Students: " + courseStudentNamesString + ")";
         return fullCourseDetails;
     }
+
+    void setName(String name) {
+        this.name = name;
+    }
 }

@@ -1,5 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Administrator {
 
@@ -170,5 +173,96 @@ public class Administrator {
             gender = 'F';
         }
         return gender;
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        School newSchool =  new School("Temp");
+        Administrator administrator = new Administrator(newSchool);
+        administrator.loadFromFile(args[0]);
+        int durationSimulation = Integer.parseInt(args[1]);
+        administrator.run(durationSimulation);
+    }
+
+    void loadFromFile(String filename) throws FileNotFoundException {
+        File file = new File(filename);
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+
+            String[] lineParts = line.split(":");
+
+            String object = lineParts[0];
+
+            String objectAttributes = lineParts[1];
+            String[] objectAttributesParts = objectAttributes.split(",");
+
+            if (object.equals("school")) {
+                String attribute1 = objectAttributesParts[0];
+                String schoolName = attribute1;
+                this.school.setName(schoolName);
+            }
+            else if (object.equals("subject")) {
+                String attribute1 = objectAttributesParts[0];
+                String attribute2 = objectAttributesParts[1];
+                String attribute3 = objectAttributesParts[2];
+                String attribute4 = objectAttributesParts[3];
+                int subjectId = Integer.parseInt(attribute2);
+                int specialism = Integer.parseInt(attribute3);
+                int duration = Integer.parseInt(attribute4);
+                String description = attribute1;
+                Subject newSubject = new Subject(subjectId, specialism, duration, description);
+                school.add(newSubject);
+            }
+            else if (object.equals("student")) {
+                String attribute1 = objectAttributesParts[0];
+                String attribute2 = objectAttributesParts[1];
+                String attribute3 = objectAttributesParts[2];
+                String name = attribute1;
+                char gender = attribute2.charAt(0);
+                int age = Integer.parseInt(attribute3);
+                Student newStudent = new Student(name, gender, age);
+                school.add(newStudent);
+            }
+            else if (object.equals("Teacher")) {
+                String attribute1 = objectAttributesParts[0];
+                String attribute2 = objectAttributesParts[1];
+                String attribute3 = objectAttributesParts[2];
+                String name = attribute1;
+                char gender = attribute2.charAt(0);
+                int age = Integer.parseInt(attribute3);
+                Teacher newTeacher = new Teacher(name, gender, age);
+                school.add(newTeacher);
+            }
+            else if (object.equals("Demonstrator")) {
+                String attribute1 = objectAttributesParts[0];
+                String attribute2 = objectAttributesParts[1];
+                String attribute3 = objectAttributesParts[2];
+                String name = attribute1;
+                char gender = attribute2.charAt(0);
+                int age = Integer.parseInt(attribute3);
+                Demonstrator newDemonstrator = new Demonstrator(name, gender, age);
+                school.add(newDemonstrator);
+            }
+            else if (object.equals("OOTrainer")) {
+                String attribute1 = objectAttributesParts[0];
+                String attribute2 = objectAttributesParts[1];
+                String attribute3 = objectAttributesParts[2];
+                String name = attribute1;
+                char gender = attribute2.charAt(0);
+                int age = Integer.parseInt(attribute3);
+                OOTrainer newOOTrainer = new OOTrainer(name, gender, age);
+                school.add(newOOTrainer);
+            }
+            else if (object.equals("GUITrainer")) {
+                String attribute1 = objectAttributesParts[0];
+                String attribute2 = objectAttributesParts[1];
+                String attribute3 = objectAttributesParts[2];
+                String name = attribute1;
+                char gender = attribute2.charAt(0);
+                int age = Integer.parseInt(attribute3);
+                GUITrainer newGUITrainer = new GUITrainer(name, gender, age);
+                school.add(newGUITrainer);
+            }
+        }
     }
 }
