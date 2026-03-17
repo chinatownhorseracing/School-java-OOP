@@ -1,14 +1,21 @@
+import java.util.ArrayList;
+import java.util.List;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Subject s = new Subject(1, 1, 2, "");
-        Course c = new Course(s, 2);
-
-        for (int i = 0; i < 6; i++) {
-            c.aDayPasses();
-        }
-
-        System.out.println(c.getStatus());
+//        Subject s = new Subject(1, 1, 2, "");
+//        Course c = new Course(s, 2);
+//
+//        for (int i = 0; i < 6; i++) {
+//            c.aDayPasses();
+//        }
+//
+//        System.out.println(c.getStatus());
+        List<String> strings = new ArrayList<>();
+        strings.add("Alice");
+        strings.add("Bob");
+        System.out.println(strings);
     }
 }

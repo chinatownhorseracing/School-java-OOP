@@ -80,10 +80,16 @@ public class School {
     public String toString() {
         String prettyName = "School: " + name;
         String prettySubject = "Subjects:";
-        String prettySubjectsList;
-        for (Subject subject : subjects) {
-            String subjectName = subject.getDescription();
+        String prettySubjectsList = getPrettySubjectsList();
+        String prettyCourse = "Courses:";
+        String prettyCoursesList = "";
+        for (Course course : courses) {
+            String fullCourseDetails = getFullCourseDetails(course);
+            prettyCoursesList = prettyCoursesList + fullCourseDetails + "\n";
         }
+        String prettyPrintedSchool = "";
+        prettyPrintedSchool = prettyPrintedSchool + prettyName + "\n" + prettySubject + "\n" + prettySubjectsList + "\n" + prettyCourse + "\n" + prettyCoursesList + "\n";
+        return prettyPrintedSchool;
     }
 
     // RED
@@ -222,5 +228,39 @@ public class School {
         }
 
         return subjectIds;
+    }
+
+    String getPrettySubjectsList() {
+        String prettySubjectsList = "";
+        for (Subject subject : subjects) {
+            String subjectName = subject.getDescription();
+            prettySubjectsList = prettySubjectsList + subjectName + "\n";
+        }
+
+        return prettySubjectsList;
+    }
+
+    String getFullCourseDetails(Course course) {
+        String fullCourseDetails = "";
+
+        Subject courseSubject = course.getSubject();
+        String courseSubjectName = courseSubject.getDescription();
+
+        Instructor courseInstructor = course.getInstructor();
+        String instructorName = courseInstructor.getName();
+
+        List<Student> courseStudents = course.getStudents();
+        List<String> courseStudentsNamesList = new ArrayList<>();
+        for (Student student : courseStudents) {
+            String studentName = student.getName();
+            courseStudentsNamesList.add(name);
+        }
+        String courseStudentNamesString = "";
+        for (String studentName : courseStudentsNamesList) {
+            courseStudentNamesString = courseStudentNamesString + " " + studentName;
+        }
+
+        fullCourseDetails = courseSubjectName + ": " + "(Instructor: " + instructorName + ", Students: " + courseStudentNamesString + ")";
+        return fullCourseDetails;
     }
 }

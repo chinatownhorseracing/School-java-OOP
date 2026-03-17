@@ -110,6 +110,10 @@ public class Course {
         return hasInstructor;
     }
 
+    Instructor getInstructor() {
+        return instructor;
+    }
+
     // RED
     boolean isCancelled() {
         return isCancelled;
