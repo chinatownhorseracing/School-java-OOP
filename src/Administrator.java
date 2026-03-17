@@ -5,6 +5,9 @@ public class Administrator {
 
     // RED
     School school;
+    Administrator(School school) {
+        this.school = school;
+    }
 
     void run() {
         while (true) {

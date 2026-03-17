@@ -78,7 +78,12 @@ public class School {
     // RED
     @Override
     public String toString() {
-
+        String prettyName = "School: " + name;
+        String prettySubject = "Subjects:";
+        String prettySubjectsList;
+        for (Subject subject : subjects) {
+            String subjectName = subject.getDescription();
+        }
     }
 
     // RED
